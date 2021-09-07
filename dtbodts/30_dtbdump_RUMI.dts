@@ -1,0 +1,233 @@
+/dts-v1/;
+
+/ {
+	compatible = "qcom,atoll-rumi\0qcom,atoll\0qcom,rumi";
+	model = "RUMI";
+	qcom,board-id = <0x0f 0x00>;
+	qcom,msm-id = <0x197 0x00>;
+
+	__fixups__ {
+		pm6150_l12 = "/fragment@1/__overlay__:vdd-io-supply:0\0/fragment@4/__overlay__:vccq2-supply:0";
+		pm6150_l19 = "/fragment@1/__overlay__:vdd-supply:0\0/fragment@4/__overlay__:vcc-supply:0";
+		pm6150_l4 = "/fragment@3/__overlay__:vdda-phy-supply:0";
+		pm6150_pdphy = "/fragment@9:target:0";
+		pm6150l_l3 = "/fragment@3/__overlay__:vdda-pll-supply:0\0/fragment@4/__overlay__:qcom,vddp-ref-clk-supply:0";
+		pm6150l_l6 = "/fragment@2/__overlay__:vdd-io-supply:0";
+		pm6150l_l9 = "/fragment@2/__overlay__:vdd-supply:0";
+		qupv3_se9_i2c = "/fragment@10:target:0";
+		qusb_phy0 = "/fragment@7:target:0";
+		sdc1_clk_off = "/fragment@1/__overlay__:pinctrl-1:0";
+		sdc1_clk_on = "/fragment@1/__overlay__:pinctrl-0:0";
+		sdc1_cmd_off = "/fragment@1/__overlay__:pinctrl-1:4";
+		sdc1_cmd_on = "/fragment@1/__overlay__:pinctrl-0:4";
+		sdc1_data_off = "/fragment@1/__overlay__:pinctrl-1:8";
+		sdc1_data_on = "/fragment@1/__overlay__:pinctrl-0:8";
+		sdc1_rclk_off = "/fragment@1/__overlay__:pinctrl-1:12";
+		sdc1_rclk_on = "/fragment@1/__overlay__:pinctrl-0:12";
+		sdc2_clk_off = "/fragment@2/__overlay__:pinctrl-1:0";
+		sdc2_clk_on = "/fragment@2/__overlay__:pinctrl-0:0";
+		sdc2_cmd_off = "/fragment@2/__overlay__:pinctrl-1:4";
+		sdc2_cmd_on = "/fragment@2/__overlay__:pinctrl-0:4";
+		sdc2_data_off = "/fragment@2/__overlay__:pinctrl-1:8";
+		sdc2_data_on = "/fragment@2/__overlay__:pinctrl-0:8";
+		sdhc_1 = "/fragment@1:target:0";
+		sdhc_2 = "/fragment@2:target:0";
+		soc = "/fragment@0:target:0";
+		thermal_zones = "/fragment@5:target:0";
+		ufs_phy_gdsc = "/fragment@4/__overlay__:vdd-hba-supply:0";
+		ufshc_mem = "/fragment@4:target:0";
+		ufsphy_mem = "/fragment@3:target:0";
+		usb0 = "/fragment@6:target:0";
+		usb_qmp_dp_phy = "/fragment@8:target:0";
+	};
+
+	__local_fixups__ {
+
+		fragment@6 {
+
+			__overlay__ {
+
+				dwc3@a600000 {
+					usb-phy = <0x00 0x04>;
+				};
+			};
+		};
+	};
+
+	__symbols__ {
+		disp_rsc = "/fragment@0/__overlay__/mailbox@af20000";
+		usb_emu_phy = "/fragment@0/__overlay__/usb_emu_phy@a720000";
+		usb_nop_phy = "/fragment@0/__overlay__/usb_nop_phy";
+		wdog = "/fragment@0/__overlay__/qcom,wdt@17c10000";
+	};
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+
+			mailbox@af20000 {
+				phandle = <0x04>;
+				status = "disabled";
+			};
+
+			qcom,wdt@17c10000 {
+				phandle = <0x03>;
+				status = "disabled";
+			};
+
+			timer {
+				clock-frequency = <0xf4240>;
+			};
+
+			timer@17c20000 {
+				clock-frequency = <0xf4240>;
+			};
+
+			usb_emu_phy@a720000 {
+				compatible = "qcom,usb-emu-phy";
+				phandle = <0x01>;
+				qcom,emu-init-seq = <0xfff0 0x04 0xfff3 0x04 0x40 0x04 0xfff3 0x04 0xfff0 0x04 0x100000 0x20 0x00 0x20 0x1a0 0x20 0x100000 0x3c 0x00 0x3c 0x10060 0x3c 0x00 0x04>;
+				reg = <0xa720000 0x9500 0xa6f8800 0x100>;
+				reg-names = "base\0qcratch_base";
+			};
+
+			usb_nop_phy {
+				compatible = "usb-nop-xceiv";
+				phandle = <0x02>;
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			pinctrl-0 = <0xffffffff 0xffffffff 0xffffffff 0xffffffff>;
+			pinctrl-1 = <0xffffffff 0xffffffff 0xffffffff 0xffffffff>;
+			pinctrl-names = "active\0sleep";
+			qcom,bus-speed-mode = "DDR_1p8v";
+			qcom,clk-rates = <0x61a80 0x1312d00 0x17d7840 0x2faf080>;
+			qcom,vdd-current-level = <0x00 0x8b290>;
+			qcom,vdd-io-always-on;
+			qcom,vdd-io-current-level = <0x00 0x4f588>;
+			qcom,vdd-io-lpm-sup;
+			qcom,vdd-io-voltage-level = <0x1b7740 0x1b7740>;
+			qcom,vdd-voltage-level = <0x2d0370 0x2d0370>;
+			status = "ok";
+			vdd-io-supply = <0xffffffff>;
+			vdd-supply = <0xffffffff>;
+		};
+	};
+
+	fragment@10 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			pinctrl-0 = <0xffffffff 0xffffffff 0xffffffff>;
+			pinctrl-1 = <0xffffffff 0xffffffff 0xffffffff>;
+			pinctrl-names = "active\0sleep";
+			qcom,bus-speed-mode = "SDR12\0SDR25\0SDR50";
+			qcom,clk-rates = <0x61a80 0x1312d00 0x17d7840 0x2faf080>;
+			qcom,vdd-current-level = <0x00 0xc3500>;
+			qcom,vdd-io-current-level = <0x00 0x55f0>;
+			qcom,vdd-io-voltage-level = <0x1b7740 0x2d0370>;
+			qcom,vdd-voltage-level = <0x2d2a80 0x2d2a80>;
+			status = "ok";
+			vdd-io-supply = <0xffffffff>;
+			vdd-supply = <0xffffffff>;
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "qcom,ufs-phy-qrbtc-sdm845";
+			status = "ok";
+			vdda-phy-max-microamp = <0xf5b4>;
+			vdda-phy-supply = <0xffffffff>;
+			vdda-pll-max-microamp = <0x477c>;
+			vdda-pll-supply = <0xffffffff>;
+		};
+	};
+
+	fragment@4 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			limit-rx-hs-gear = <0x01>;
+			limit-tx-hs-gear = <0x01>;
+			qcom,disable-lpm;
+			qcom,vddp-ref-clk-max-microamp = <0x64>;
+			qcom,vddp-ref-clk-max-uV = <0x124f80>;
+			qcom,vddp-ref-clk-min-uV = <0x124f80>;
+			qcom,vddp-ref-clk-supply = <0xffffffff>;
+			rpm-level = <0x00>;
+			scsi-cmd-timeout = <0x493e0>;
+			spm-level = <0x00>;
+			status = "ok";
+			vcc-max-microamp = <0x927c0>;
+			vcc-supply = <0xffffffff>;
+			vccq2-max-microamp = <0x927c0>;
+			vccq2-supply = <0xffffffff>;
+			vdd-hba-fixed-regulator;
+			vdd-hba-supply = <0xffffffff>;
+		};
+	};
+
+	fragment@5 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+		};
+	};
+
+	fragment@6 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+
+			dwc3@a600000 {
+				maximum-speed = "high-speed";
+				usb-phy = <0x01 0x02>;
+			};
+
+			qcom,usbbam@a704000 {
+				status = "disabled";
+			};
+		};
+	};
+
+	fragment@7 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@8 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@9 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+};
